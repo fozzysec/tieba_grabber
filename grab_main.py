@@ -2,9 +2,7 @@
 
 from gevent import monkey
 monkey.patch_all()
-import os
 import sys
-import re
 import gevent
 import psycopg2
 from lxml import etree
@@ -34,10 +32,13 @@ def main(conf_file):
     for keyword in doc.xpath('/xml/fuzz/@keyword'):
         cur = conn.cursor()
         cur.execute('CREATE TABLE IF NOT EXISTS %s (id serial PRIMARY KEY, data json NOT NULL, hash text UNIQUE NOT NULL);' % keyword)
+        cur.execute('ALTER SEQUENCE %s_id_seq CYCLE;' % keyword)
         conn.commit()
         cur.close()
+        print('grabbing index of %s' % keyword)
         items = grab_index(session, keyword)
         futures = []
+        print('grabbing posts of %s' % keyword)
         for item in items:
             futures.append(tp.submit(grab_post, session, item, items_queue))
         wait(futures)

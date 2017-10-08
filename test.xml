@@ -1,0 +1,43 @@
+<xml>
+	<fuzz keyword="秀萝">
+		<record id="1">
+			<keyword>[^电](五[^红]*红)</keyword>
+			<keyword>白螺母</keyword>
+			<email>fozzy@fozzy.co</email>
+			<email>fozzysec@gmail.com</email>
+		</record>
+		<record id="2">
+			<keyword>[^电](五[^红]*红)</keyword>
+			<keyword>红彩云</keyword>
+			<email>fozzy@fozzy.co</email>
+		</record>
+		<record id="3">
+			<keyword>[^电](四[^红]*红)</keyword>
+			<keyword>狐金</keyword>
+			<keyword>封川</keyword>
+			<email>fozzysec@gmail.com</email>
+		</record>
+	</fuzz>
+	<fuzz keyword="盾娘">
+		<record id="1">
+			<keyword>[^电](五[^红]*红)</keyword>
+			<email>fozzy@fozzy.co</email>
+		</record>
+	</fuzz>
+	<fuzz keyword="盾萝">
+		<record id="1">
+			<keyword>[黑|白]金夜斩白</keyword>
+			<email>fozzy@fozzy.co</email>
+		</record>
+		<record id="2">
+			<keyword>猴金</keyword>
+			<email>fozzy@fozzy.co</email>
+		</record>
+	</fuzz>
+	<fuzz keyword="琴爹">
+		<record id="1">
+			<keyword>狐狸毛</keyword>
+			<email>fozzy@fozzy.co</email>
+		</record>
+	</fuzz>
+</xml>

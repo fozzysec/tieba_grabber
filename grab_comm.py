@@ -26,8 +26,10 @@ def sql_writer(conn, tablename, items_queue):
     cur = conn.cursor()
     while not items_queue.empty():
         checksum = hashlib.sha256()
-        item = json.dumps(items_queue.get())
-        checksum.update(item.encode('utf8'))
+        item_obj = items_queue.get()
+        item = json.dumps(item_obj)
+        contents = ''.join(item_obj['preview'])
+        checksum.update(contents.encode('utf8'))
         cur.execute("INSERT INTO {} (data, hash) VALUES(%s, %s) ON CONFLICT (hash) DO NOTHING;".format(tablename), (item, checksum.hexdigest()))
     conn.commit()
     cur.close()
