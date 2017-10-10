@@ -1,6 +1,7 @@
 import json
 import psycopg2
 import hashlib
+import time
 from requests import Session
 from requests.adapters import HTTPAdapter
 from grab_setting import SITE_URL, USER_AGENT, RETRY_TIMES, TIMEOUT
@@ -22,10 +23,10 @@ def init_session():
     return session
 
 def sql_writer(conn, tablename, items_queue):
-    print("Begin writing data into table %s" % tablename)
+    print("[%s]writing data into table %s" % (time.ctime(), tablename))
     cur = conn.cursor()
     while not items_queue.empty():
-        checksum = hashlib.sha256()
+        checksum = hashlib.sha1()
         item_obj = items_queue.get()
         item = json.dumps(item_obj)
         contents = ''.join(item_obj['preview'])

@@ -4,6 +4,7 @@ from gevent import monkey
 monkey.patch_all()
 import sys
 import gevent
+import time
 import psycopg2
 from lxml import etree
 from grab_comm import init_session, sql_writer
@@ -35,10 +36,10 @@ def main(conf_file):
         cur.execute('ALTER SEQUENCE %s_id_seq CYCLE;' % keyword)
         conn.commit()
         cur.close()
-        print('grabbing index of %s' % keyword)
+        print('[%s]grabbing index of %s' % (time.ctime(), keyword))
         items = grab_index(session, keyword)
         futures = []
-        print('grabbing posts of %s' % keyword)
+        print('[%s]grabbing posts of %s' % (time.ctime(), keyword))
         for item in items:
             futures.append(tp.submit(grab_post, session, item, items_queue))
         wait(futures)
