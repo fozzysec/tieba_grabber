@@ -33,4 +33,4 @@ def grab_url(session, url):
             yield from grab_url(session, SITE_URL + next_page[0])
 
 def grab_index(session, keyword):
-    yield from grab_url(session, QUERY_URL.format(SITE_URL, quote_plus(keyword)))
+    return grab_url(session, QUERY_URL.format(SITE_URL, quote_plus(keyword)))
