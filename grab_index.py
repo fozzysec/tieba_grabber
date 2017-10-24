@@ -17,11 +17,14 @@ def grab_url(session, url):
             thread_url = div.xpath('.//span[@class="p_title"]/a[@class="bluelink"]/@href')[0]
             if('tieba.baidu.com' in thread_url):
                 continue
-            thread_title = div.xpath('.//span[@class="p_title"]/a/text()')[0]
-            thread_author = div.xpath('.//a[not(@data-fid)]/font/text()')[0]
-            thread_tieba = div.xpath('.//a[@class="p_forum"]/font/text()')[0]
-            thread_date = div.xpath('.//font[@class="p_green p_date"]/text()')[0]
-            thread_url = SITE_URL + thread_url
+            try:
+                thread_title = div.xpath('.//span[@class="p_title"]/a/text()')[0]
+                thread_author = div.xpath('.//a[not(@data-fid)]/font/text()')[0]
+                thread_tieba = div.xpath('.//a[@class="p_forum"]/font/text()')[0]
+                thread_date = div.xpath('.//font[@class="p_green p_date"]/text()')[0]
+                thread_url = SITE_URL + thread_url
+            except IndexError:
+                continue
             item['url'] = thread_url
             item['title'] = thread_title
             item['author'] = thread_author
